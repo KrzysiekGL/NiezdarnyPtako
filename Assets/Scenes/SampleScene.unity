@@ -288,9 +288,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 519420028}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e682002c38fd3e9208995ca372bce9de, type: 3}
+  m_Script: {fileID: 11500000, guid: 1189423ec761e05bcb7899ada868127a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  TargetFrameRate: 30
 --- !u!4 &766324771 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3679941528945349856, guid: e1402178a73fe917e84e95f4a7fe8227, type: 3}
@@ -400,7 +401,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7285d5d4d19210e5b451e2b6696848e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  obstacle: {fileID: 6164063731345345990, guid: e1402178a73fe917e84e95f4a7fe8227, type: 3}
+  obstacle: {fileID: 4762328549245528394, guid: e1402178a73fe917e84e95f4a7fe8227, type: 3}
 --- !u!1001 &1658014100
 PrefabInstance:
   m_ObjectHideFlags: 0
