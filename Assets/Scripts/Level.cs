@@ -5,28 +5,28 @@ using UnityEngine;
 public class Level : MonoBehaviour
 {
 		[SerializeReference]
-		private GameObject obstacle;
+		private Obstacle obstacle;
 
 		private float _timeElapsed = 0f;
 		private float _interval = 3f;
 
-		private Transform[] _obstaclesLocations;
+		private Transform _levelTransform;
 
-		// Start is called before the first frame update
 		void Start()
 		{
+				_levelTransform = GetComponent<Transform>();
 		}
 
-		// Update is called once per frame
 		void Update()
 		{
-        // Generate obstacles after the interval
-        _timeElapsed += Time.deltaTime;
+				// Generate obstacles after the interval
+				_timeElapsed += Time.deltaTime;
 				if (_timeElapsed >= _interval)
 				{
 						_timeElapsed = 0f;
 						_interval = Random.Range(3f, 4f);
-						Instantiate(obstacle, gameObject.transform.position , Quaternion.identity);
+						Obstacle obstacleClone = Instantiate<Obstacle>(obstacle, _levelTransform.position, Quaternion.identity, _levelTransform.parent);
+						obstacleClone.transform.parent = _levelTransform;
 				}
 		}
 }
