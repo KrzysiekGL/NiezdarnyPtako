@@ -13,7 +13,8 @@ GameObject:
   - component: {fileID: 8593557075595612932}
   - component: {fileID: 3929078140032708288}
   - component: {fileID: 4300740623083690388}
-  - component: {fileID: 2653617000776568745}
+  - component: {fileID: 2165058466984044912}
+  - component: {fileID: 458209962567754467}
   m_Layer: 7
   m_Name: Ptako
   m_TagString: Untagged
@@ -150,7 +151,20 @@ MonoBehaviour:
   _playerMask:
     serializedVersion: 2
     m_Bits: 55
---- !u!95 &2653617000776568745
+--- !u!114 &2165058466984044912
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2611770989516236753}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f659ea008758716d94667aa76146c71, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _animator: {fileID: 458209962567754467}
+--- !u!95 &458209962567754467
 Animator:
   serializedVersion: 4
   m_ObjectHideFlags: 0
@@ -160,7 +174,7 @@ Animator:
   m_GameObject: {fileID: 2611770989516236753}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: c69a05972f4527faf9c23dc19233966f, type: 2}
+  m_Controller: {fileID: 9100000, guid: cc864b4a08d7f7d93a965eeef3c28a6d, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
