@@ -10,7 +10,6 @@ public class Dispenser : MonoBehaviour
 				GameObject gameObject = collider2D.transform.parent.gameObject;
 				if (gameObject.layer == 6)
 				{
-						Debug.Log("Collided with " + gameObject.name);
 						Destroy(gameObject);
 				}
 		}
