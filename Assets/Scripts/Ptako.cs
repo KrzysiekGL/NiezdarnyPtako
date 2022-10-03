@@ -10,6 +10,7 @@ public class Ptako : MonoBehaviour
 		private Rigidbody2D _rigidbody2D;
 
 		private float _jumpTrhust = 5f;
+		private float _rotationSmoothParameter = 15f;
 
 		private bool _isJumpPressed;
 		private bool _isGrounded;
@@ -21,7 +22,7 @@ public class Ptako : MonoBehaviour
 				// Ignore collision with obstacle's "Obstacle Layer Mask" parts
 				Physics2D.IgnoreLayerCollision(7, 6, true);
 
-				_rigidbody2D = gameObject.GetComponent<Rigidbody2D>();
+				_rigidbody2D = GetComponent<Rigidbody2D>();
 		}
 
 		void Update()
@@ -39,15 +40,35 @@ public class Ptako : MonoBehaviour
 
 		void FixedUpdate()
 		{
-				if (_gameOver)
+				if (_isJumpPressed && !_gameOver)
 				{
-						return;
+						_rigidbody2D.AddForce(Vector2.up * _jumpTrhust, ForceMode2D.Impulse);
+						_isJumpPressed = false;
 				}
 
-				if (_isJumpPressed)
+				float verticalVelocity = _rigidbody2D.velocity.y;
+				// Rising - rotate to the right about the Z axis
+				if(verticalVelocity > 0f)
 				{
-						_rigidbody2D.AddForce(transform.up * _jumpTrhust, ForceMode2D.Impulse);
-						_isJumpPressed = false;
+						if (transform.localRotation.z < 45f)
+						{
+								float smoothRotate = 45f * Time.deltaTime * _rotationSmoothParameter;
+								transform.localRotation = Quaternion.Euler(0, 0, smoothRotate);
+						}
+				}
+				// Upright
+				else if (verticalVelocity == 0f)
+				{
+						transform.localRotation = Quaternion.identity;
+				}
+				// Descanding - rotate to the left about the Z axis
+				else
+				{
+						if (transform.localRotation.z > -45f)
+						{
+								float smoothRotate = -45f * Time.deltaTime * _rotationSmoothParameter;
+								transform.localRotation = Quaternion.Euler(0, 0, smoothRotate);
+						}
 				}
 		}
 
