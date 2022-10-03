@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Dispenser : MonoBehaviour
+public class Trashbin : MonoBehaviour
 {
 		// Destroy any Obstacle type object when collision occures
 		void OnTriggerEnter2D(Collider2D collider2D)
