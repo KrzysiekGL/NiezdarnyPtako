@@ -4,9 +4,6 @@ using UnityEngine;
 
 public class Ptako : MonoBehaviour
 {
-	[SerializeField]
-	private LayerMask _playerMask;
-
 	private Rigidbody2D _rigidbody2D;
 
 	private float _jumpTrhust = 5f;
@@ -18,9 +15,6 @@ public class Ptako : MonoBehaviour
 	private bool _gameOver = false;
 
 	void Start() {
-		// Ignore collision with obstacle's "Obstacle Layer Mask" parts
-		Physics2D.IgnoreLayerCollision(7, 6, true);
-
 		// Get the rigidbody2D component for this gameObject
 		_rigidbody2D = GetComponent<Rigidbody2D>();
 	}
@@ -69,5 +63,9 @@ public class Ptako : MonoBehaviour
 		_gameOver = true;
 		_rigidbody2D.AddForce(transform.up * 0.4f * _jumpTrhust, ForceMode2D.Impulse);
 		_rigidbody2D.AddForce(transform.right * -0.2f * _jumpTrhust, ForceMode2D.Impulse);
+	}
+
+	void OnTriggerExit2D(Collider2D other) {
+		Debug.Log("Exitted a trigger");
 	}
 }
