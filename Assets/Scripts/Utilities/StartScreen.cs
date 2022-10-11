@@ -3,12 +3,20 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-public class StartScreen : MonoBehaviour {
-	[SerializeReference] private UIDocument _uiDocument;
+public class StartScreen : MonoBehaviour
+{
+		private UIDocument _doc;
 
-		void Update() {
-		if (Input.GetKeyDown(KeyCode.Space)) {
-			Destroy(_uiDocument);
+		void Awake()
+		{
+				_doc = GetComponent<UIDocument>();
 		}
-	}
+
+		void Update()
+		{
+				if (Input.GetKeyDown(KeyCode.Space))
+				{
+						Destroy(_doc);
+				}
+		}
 }
