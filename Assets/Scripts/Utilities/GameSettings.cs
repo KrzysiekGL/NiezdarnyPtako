@@ -7,7 +7,13 @@ public class GameSettings : MonoBehaviour
 
 		void Start()
 		{
-        QualitySettings.vSyncCount = 0;
-        Application.targetFrameRate = TargetFrameRate;
-    }
+				QualitySettings.vSyncCount = 0;
+				Application.targetFrameRate = TargetFrameRate;
+		}
+
+		void Update()
+		{
+				if(Input.GetKeyDown(KeyCode.Escape))
+						Application.Quit();
+		}
 }
