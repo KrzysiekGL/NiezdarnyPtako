@@ -1,88 +1,107 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Ptako : MonoBehaviour
 {
-    private Rigidbody2D _rigidbody2D;
+		private Rigidbody2D _rigidbody2D;
 
-    private float _jumpTrhust = 5f;
-    private float _rotationSmoothParameter = 15f;
+		private const float _jumpTrhust = 5f;
+		private const float _rotationSmoothParameter = 15f;
 
-    private bool _isJumpPressed;
-    private bool _isGrounded;
+		private bool _isJumpPressed;
+		private bool _isGrounded;
 
-    private bool _gameOver = false;
+		private bool _isGameOver = false;
 
-    public event EventHandler PointScored = delegate { };
+		// Publisher Subscriber (pub/sub) system
+		// Inform all interested participatns, that the point was scored
+		public event EventHandler PointScored = delegate { };
+		// ---||---, that the game ended
+		public event EventHandler GameEnded = delegate { };
+		// ---||---, that the game was reset
+		public event EventHandler GameReset = delegate { };
 
-    void Start()
-    {
-        // Get the rigidbody2D component for this gameObject
-        _rigidbody2D = GetComponent<Rigidbody2D>();
-    }
+		void Start()
+		{
+				// Get the rigidbody2D component for this gameObject
+				_rigidbody2D = GetComponent<Rigidbody2D>();
 
-    void Update()
-    {
-        // If the game is over, just skip any updates
-        if (_gameOver)
-        {
-            return;
-        }
+				// Subscribe to both GameEnded and GameReset for internal use
+				GameEnded += GameOver;
+				GameReset += RestartPtako;
+		}
 
-        // Jump
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            _isJumpPressed = true;
-        }
-    }
+		void Update()
+		{
+				// Restart the game
+				if (Input.GetKeyDown(KeyCode.R) && _isGameOver)
+				{
+						GameReset.Invoke(this, new EventArgs());
+				}
 
-    void FixedUpdate()
-    {
-        // Jump only if the game is not over yet
-        if (_isJumpPressed && !_gameOver)
-        {
-            _rigidbody2D.AddForce(Vector2.up * _jumpTrhust, ForceMode2D.Impulse);
-            _isJumpPressed = false;
-        }
+				// Jump
+				if (Input.GetKeyDown(KeyCode.Space) && !_isGameOver)
+				{
+						_isJumpPressed = true;
+				}
+		}
 
-        float verticalVelocity = _rigidbody2D.velocity.y;
-        // Rising - rotate to the right about the Z axis
-        if (verticalVelocity > 0f)
-        {
-            if (transform.localRotation.z < 45f)
-            {
-                float smoothRotate = 45f * Time.deltaTime * _rotationSmoothParameter;
-                transform.localRotation = Quaternion.Euler(0, 0, smoothRotate);
-            }
-        }
-        // Upright
-        else if (verticalVelocity == 0f)
-        {
-            transform.localRotation = Quaternion.identity;
-        }
-        // Descanding - rotate to the left about the Z axis
-        else
-        {
-            if (transform.localRotation.z > -45f)
-            {
-                float smoothRotate = -45f * Time.deltaTime * _rotationSmoothParameter;
-                transform.localRotation = Quaternion.Euler(0, 0, smoothRotate);
-            }
-        }
-    }
+		void FixedUpdate()
+		{
+				// Jump only if the game is not over yet
+				if (_isJumpPressed && !_isGameOver)
+				{
+						_rigidbody2D.AddForce(Vector2.up * _jumpTrhust, ForceMode2D.Impulse);
+						_isJumpPressed = false;
+				}
 
-    void OnCollisionEnter2D(Collision2D col)
-    {
-        _gameOver = true;
-        _rigidbody2D.AddForce(transform.up * 0.4f * _jumpTrhust, ForceMode2D.Impulse);
-        _rigidbody2D.AddForce(transform.right * -0.2f * _jumpTrhust, ForceMode2D.Impulse);
-    }
+				float verticalVelocity = _rigidbody2D.velocity.y;
+				// Rising - rotate to the right about the Z axis
+				if (verticalVelocity > 0f)
+				{
+						if (transform.localRotation.z < 45f)
+						{
+								float smoothRotate = 45f * Time.deltaTime * _rotationSmoothParameter;
+								transform.localRotation = Quaternion.Euler(0, 0, smoothRotate);
+						}
+				}
+				// Upright
+				else if (verticalVelocity == 0f)
+				{
+						transform.localRotation = Quaternion.identity;
+				}
+				// Descanding - rotate to the left about the Z axis
+				else
+				{
+						if (transform.localRotation.z > -45f)
+						{
+								float smoothRotate = -45f * Time.deltaTime * _rotationSmoothParameter;
+								transform.localRotation = Quaternion.Euler(0, 0, smoothRotate);
+						}
+				}
+		}
 
-    void OnTriggerExit2D(Collider2D other)
-    {
-        if (!_gameOver && other.name == "Between")
-            PointScored.Invoke(this, new EventArgs());
-    }
+		void OnCollisionEnter2D(Collision2D col)
+		{
+				_rigidbody2D.AddForce(transform.up * 0.4f * _jumpTrhust, ForceMode2D.Impulse);
+				_rigidbody2D.AddForce(transform.right * -0.2f * _jumpTrhust, ForceMode2D.Impulse);
+				GameEnded.Invoke(this, new EventArgs());
+		}
+
+		void OnTriggerExit2D(Collider2D other)
+		{
+				if (!_isGameOver && other.name == "Between")
+						PointScored.Invoke(this, new EventArgs());
+		}
+
+		void GameOver(object sender, EventArgs e)
+		{
+				_isGameOver = true;
+		}
+
+		void RestartPtako(object sender, EventArgs e)
+		{
+				transform.localRotation = Quaternion.identity;
+				transform.position = new Vector3(0, 0, 0);
+		}
 }

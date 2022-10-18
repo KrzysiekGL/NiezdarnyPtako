@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -10,13 +9,20 @@ public class StartScreen : MonoBehaviour
 		void Awake()
 		{
 				_doc = GetComponent<UIDocument>();
+				// Subscribe to the Ptako's GameReset event
+				GameObject.FindObjectOfType<Ptako>().GameReset += RestartTheGame;
 		}
 
 		void Update()
 		{
-				if (Input.GetKeyDown(KeyCode.Space))
+				if (Input.GetKeyDown(KeyCode.Space) && _doc.rootVisualElement.style.display != DisplayStyle.None)
 				{
-						Destroy(_doc);
+						_doc.rootVisualElement.style.display = DisplayStyle.None;
 				}
+		}
+
+		void RestartTheGame(object sender, EventArgs e)
+		{
+				_doc.rootVisualElement.style.display = DisplayStyle.Flex;
 		}
 }
