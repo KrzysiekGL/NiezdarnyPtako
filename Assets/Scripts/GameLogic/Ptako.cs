@@ -23,8 +23,9 @@ public class Ptako : MonoBehaviour
 
 		void Start()
 		{
-				// Get the rigidbody2D component for this gameObject
+				// Get the rigidbody2D component for this gameObject and exclude it from physics calculations
 				_rigidbody2D = GetComponent<Rigidbody2D>();
+				_rigidbody2D.isKinematic = true;
 
 				// Subscribe to both GameEnded and GameReset for internal use
 				GameEnded += GameOver;
@@ -51,6 +52,9 @@ public class Ptako : MonoBehaviour
 				// Jump only if the game is not over yet
 				if (_isJumpPressed && !_isGameOver)
 				{
+						// If Ptako is still excluded from physics calculations, include it to them
+						if (_rigidbody2D.isKinematic)
+								_rigidbody2D.isKinematic = false;
 						_rigidbody2D.AddForce(Vector2.up * _jumpTrhust, ForceMode2D.Impulse);
 						_isJumpPressed = false;
 				}
@@ -101,7 +105,11 @@ public class Ptako : MonoBehaviour
 
 		void RestartPtako(object sender, EventArgs e)
 		{
+				// Reset all parameters and exclude from physics calculations
 				transform.localRotation = Quaternion.identity;
+				_rigidbody2D.isKinematic = true;
+				_rigidbody2D.velocity = new Vector2(0, 0);
 				transform.position = new Vector3(0, 0, 0);
+				_isGameOver = false;
 		}
 }
