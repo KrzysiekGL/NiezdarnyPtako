@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Obstacle : MonoBehaviour
@@ -28,10 +26,5 @@ public class Obstacle : MonoBehaviour
 
 				float speed = 1f;
 				GetComponent<Rigidbody2D>().velocity = new Vector2(-speed, 0f);
-		}
-
-		// Update is called once per frame
-		void Update()
-		{
 		}
 }

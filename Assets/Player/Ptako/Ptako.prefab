@@ -13,6 +13,8 @@ GameObject:
   - component: {fileID: 8593557075595612932}
   - component: {fileID: 3929078140032708288}
   - component: {fileID: 4300740623083690388}
+  - component: {fileID: 2165058466984044912}
+  - component: {fileID: 458209962567754467}
   m_Layer: 7
   m_Name: Ptako
   m_TagString: Untagged
@@ -76,9 +78,9 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: db750325989564987a34393247d883b4, type: 3}
-  m_Color: {r: 0.5471698, g: 0.16776434, b: 0.16776434, a: 1}
-  m_FlipX: 0
+  m_Sprite: {fileID: 1993822889, guid: 31b55a0956fc7a8afb209cc76319bc34, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FlipX: 1
   m_FlipY: 0
   m_DrawMode: 0
   m_Size: {x: 1, y: 1}
@@ -111,7 +113,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.8, y: 0.6}
   m_EdgeRadius: 0
 --- !u!50 &3929078140032708288
 Rigidbody2D:
@@ -131,7 +133,7 @@ Rigidbody2D:
   m_GravityScale: 1
   m_Material: {fileID: 6200000, guid: d04eeb777190e1248b118d2d60b5fca4, type: 2}
   m_Interpolate: 0
-  m_SleepingMode: 2
+  m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
 --- !u!114 &4300740623083690388
@@ -146,6 +148,35 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e79905d1bc478f791ad1e8ef92843f4c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _playerMask:
-    serializedVersion: 2
-    m_Bits: 55
+--- !u!114 &2165058466984044912
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2611770989516236753}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f659ea008758716d94667aa76146c71, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!95 &458209962567754467
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2611770989516236753}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: cc864b4a08d7f7d93a965eeef3c28a6d, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0

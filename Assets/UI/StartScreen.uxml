@@ -1,0 +1,8 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:VisualElement name="root" style="height: 100%; width: 100%; justify-content: center; flex-direction: column; align-items: center; padding-left: 25px; padding-right: 25px; padding-top: 25px; padding-bottom: 25px;">
+        <ui:VisualElement style="height: 30%; width: 30%; justify-content: center; align-items: center;">
+            <ui:Label tabindex="-1" text="Press SPACE to play" display-tooltip-when-elided="true" name="GameStartInfobox" style="align-items: center; font-size: 100px; -unity-text-align: middle-center;" />
+            <ui:Label tabindex="-1" text="Press C to change the color of Ptako" display-tooltip-when-elided="true" name="ChangeColorInfobox" style="font-size: 64px; justify-content: center; align-items: center; -unity-text-align: upper-center; color: rgb(60, 60, 60);" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>
